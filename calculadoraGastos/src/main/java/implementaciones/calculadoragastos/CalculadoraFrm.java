@@ -4,6 +4,11 @@
  */
 package implementaciones.calculadoragastos;
 
+import implementaciones.control.CalculadoraGastos;
+import implementaciones.control.Categoria;
+import implementaciones.control.GestorDeGastos;
+import implementaciones.control.Gasto;
+import implementaciones.control.ConfiguradorDatos;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.DefaultListModel;
