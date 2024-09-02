@@ -4,7 +4,6 @@
  */
 package implementaciones.control;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class ConfiguradorDatos {

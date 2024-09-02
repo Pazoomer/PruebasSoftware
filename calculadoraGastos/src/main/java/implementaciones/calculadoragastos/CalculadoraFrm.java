@@ -9,8 +9,8 @@ import implementaciones.control.Categoria;
 import implementaciones.control.GestorDeGastos;
 import implementaciones.control.Gasto;
 import implementaciones.control.ConfiguradorDatos;
-import implementaciones.multimedia.FotosManager;
-import implementaciones.tipografia.FuentesManager;
+import implementaciones.multimediaManager.FotosManager;
+import implementaciones.multimediaManager.FuentesManager;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.HashMap;
@@ -36,7 +36,7 @@ public class CalculadoraFrm extends javax.swing.JFrame {
     public CalculadoraFrm() {
         initComponents();
         fuentesManager = new FuentesManager();
-        fuentesManager.cargarFuente(); // Load fonts
+        fuentesManager.cargarFuente();
         inicializarDatos();
         actualizarExplicacion();
         actualizarFuenteTitulo();
@@ -58,18 +58,16 @@ public class CalculadoraFrm extends javax.swing.JFrame {
             lstResumen.setFont(fuenteCuerpo);
             btnRegistrar.setFont(fuenteCuerpo);
             btnResumenes.setFont(fuenteCuerpo);
-            
         } else {
             System.out.println("Fuente no cargada correctamente.");
         }
     }
     
-        private void actualizarFuenteTitulo() {
+    private void actualizarFuenteTitulo() {
         Font fuenteTitulo = fuentesManager.getFuenteTitulo();
         if (fuenteTitulo != null) {
             lblRegistroGastos.setFont(fuenteTitulo);
             lblResumenGastos.setFont(fuenteTitulo);
-            // Apply font to other components if needed
         } else {
             System.out.println("Fuente no cargada correctamente.");
         }
@@ -79,12 +77,10 @@ public class CalculadoraFrm extends javax.swing.JFrame {
         this.fotosManager = new FotosManager() ;
         calculadora = new CalculadoraGastos();
         categorias = new HashMap<>();
-
         
         lblFondo.setIcon(fotosManager.getFoto(
-                ("src/main/java/implementaciones/imagenes/fondoMorado.jpeg")));
+                ("src/main/java/resources/images/fondoMorado.jpeg")));
                 
-        
         // Usar el ConfiguradorDeDatos para inicializar datos
         ConfiguradorDatos.inicializarDatos(calculadora, categorias);
 
@@ -98,14 +94,19 @@ public class CalculadoraFrm extends javax.swing.JFrame {
         }
     }
     
-        private void actualizarExplicacion() {
+    private void actualizarExplicacion() {
         String nombreCategoria = (String) cmbCategoria.getSelectedItem();
         if (nombreCategoria != null) {
             Categoria categoria = categorias.get(nombreCategoria);
             if (categoria != null) {
                 lblExplicacion.setText(categoria.getDescripcion());
+            } else {
+                lblExplicacion.setText("No hay descripción disponible.");
             }
+        } else {
+            lblExplicacion.setText("Seleccione una categoría.");
         }
+    
     }
     
     /**
@@ -142,7 +143,6 @@ public class CalculadoraFrm extends javax.swing.JFrame {
         setAutoRequestFocus(false);
         setMaximumSize(new java.awt.Dimension(600, 700));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(650, 700));
         setResizable(false);
 
         pnlPrincipal.setBackground(new java.awt.Color(58, 1, 92));
