@@ -9,6 +9,9 @@ import implementaciones.control.Categoria;
 import implementaciones.control.GestorDeGastos;
 import implementaciones.control.Gasto;
 import implementaciones.control.ConfiguradorDatos;
+import implementaciones.multimedia.FotosManager;
+import implementaciones.tipografia.FuentesManager;
+import java.awt.Font;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.DefaultListModel;
@@ -23,21 +26,31 @@ public class CalculadoraFrm extends javax.swing.JFrame {
     /**
      * Creates new form CalculadoraFrm
      */
-    
+    private FotosManager fotosManager;
     private CalculadoraGastos calculadora;
     private Map<String, Categoria> categorias;
     private GestorDeGastos gestorDeGastos;
+    private Font fuentePersonalizada;
+    private FuentesManager fuentes;
     
     public CalculadoraFrm() {
         initComponents();
+        fuentes = new FuentesManager();
         inicializarDatos();
         actualizarExplicacion();
+
     }
     
+    
     private void inicializarDatos() {
+        this.fotosManager = new FotosManager() ;
         calculadora = new CalculadoraGastos();
         categorias = new HashMap<>();
 
+        
+        lblFondo.setIcon(fotosManager.getFoto(("src/main/java/implementaciones/imagenes/fondoMorado.jpeg")));
+                
+        
         // Usar el ConfiguradorDeDatos para inicializar datos
         ConfiguradorDatos.inicializarDatos(calculadora, categorias);
 
@@ -47,7 +60,7 @@ public class CalculadoraFrm extends javax.swing.JFrame {
         // Llenar JComboBox con categorías
         for (String nombreCategoria : categorias.keySet()) {
             cmbCategoria.addItem(nombreCategoria);
-            cmbCategoria1.addItem(nombreCategoria);
+            cmbCategoriaResumen.addItem(nombreCategoria);
         }
     }
     
@@ -70,137 +83,180 @@ public class CalculadoraFrm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        pnlPrincipal = new javax.swing.JPanel();
+        pnlBack = new javax.swing.JPanel();
+        lblFondo = new javax.swing.JLabel();
+        lblRegistroGastos = new javax.swing.JLabel();
+        lblGastoMXN = new javax.swing.JLabel();
         txtGasto = new javax.swing.JTextField();
-        btnRegistrar = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        lblCategoriaRegistro = new javax.swing.JLabel();
         cmbCategoria = new javax.swing.JComboBox<>();
         lblExplicacion = new javax.swing.JLabel();
-        btnResumenes = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        cmbCategoria1 = new javax.swing.JComboBox<>();
+        lblCategoriaResumen = new javax.swing.JLabel();
+        txtTotal = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        lstResumen = new javax.swing.JList<>();
+        cmbCategoriaResumen = new javax.swing.JComboBox<>();
+        btnResumenes = new javax.swing.JButton();
+        btnRegistrar = new javax.swing.JButton();
+        lblTotal = new javax.swing.JLabel();
+        lblResumenGastos = new javax.swing.JLabel();
+        btnCerrar = new javax.swing.JPanel();
+        lblCerrar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(900, 700));
+        setAutoRequestFocus(false);
+        setMaximumSize(new java.awt.Dimension(600, 700));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(650, 700));
+        setResizable(false);
 
-        jLabel1.setText("Gasto en MXN");
+        pnlPrincipal.setBackground(new java.awt.Color(58, 1, 92));
+        pnlPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        pnlBack.setBackground(new java.awt.Color(53, 1, 44));
+        pnlBack.setMaximumSize(new java.awt.Dimension(100, 350));
+        pnlBack.setPreferredSize(new java.awt.Dimension(100, 350));
+
+        javax.swing.GroupLayout pnlBackLayout = new javax.swing.GroupLayout(pnlBack);
+        pnlBack.setLayout(pnlBackLayout);
+        pnlBackLayout.setHorizontalGroup(
+            pnlBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        pnlBackLayout.setVerticalGroup(
+            pnlBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pnlPrincipal.add(pnlBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 700));
+
+        lblRegistroGastos.setFont(new java.awt.Font("NATS", 0, 42)); // NOI18N
+        lblRegistroGastos.setForeground(new java.awt.Color(221, 255, 240));
+        lblRegistroGastos.setText("Registro de Gastos");
+        pnlPrincipal.add(lblRegistroGastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, -1, -1));
+
+        lblGastoMXN.setFont(new java.awt.Font("NATS", 0, 20)); // NOI18N
+        lblGastoMXN.setForeground(new java.awt.Color(221, 255, 240));
+        lblGastoMXN.setText("Gasto en MXN");
+        pnlPrincipal.add(lblGastoMXN, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, -1, -1));
+
+        txtGasto.setFont(new java.awt.Font("NATS", 0, 20)); // NOI18N
+        txtGasto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtGastoActionPerformed(evt);
+            }
+        });
+        pnlPrincipal.add(txtGasto, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, 210, 40));
+
+        lblCategoriaRegistro.setFont(new java.awt.Font("NATS", 0, 20)); // NOI18N
+        lblCategoriaRegistro.setForeground(new java.awt.Color(221, 255, 240));
+        lblCategoriaRegistro.setText("Categoria");
+        pnlPrincipal.add(lblCategoriaRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, -1, -1));
+
+        cmbCategoria.setFont(new java.awt.Font("NATS", 0, 20)); // NOI18N
+        cmbCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCategoriaActionPerformed(evt);
+            }
+        });
+        pnlPrincipal.add(cmbCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, 210, -1));
+
+        lblExplicacion.setFont(new java.awt.Font("NATS", 0, 20)); // NOI18N
+        lblExplicacion.setForeground(new java.awt.Color(221, 255, 240));
+        pnlPrincipal.add(lblExplicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 330, 40));
+
+        lblCategoriaResumen.setFont(new java.awt.Font("NATS", 0, 20)); // NOI18N
+        lblCategoriaResumen.setForeground(new java.awt.Color(221, 255, 240));
+        lblCategoriaResumen.setText("Categoria");
+        pnlPrincipal.add(lblCategoriaResumen, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 380, -1, -1));
+
+        txtTotal.setEditable(false);
+        txtTotal.setFont(new java.awt.Font("NATS", 0, 20)); // NOI18N
+        txtTotal.setEnabled(false);
+        txtTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTotalActionPerformed(evt);
+            }
+        });
+        pnlPrincipal.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 590, 210, -1));
+
+        lstResumen.setFont(new java.awt.Font("NATS", 0, 20)); // NOI18N
+        jScrollPane1.setViewportView(lstResumen);
+
+        pnlPrincipal.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 440, 210, -1));
+
+        cmbCategoriaResumen.setFont(new java.awt.Font("NATS", 0, 20)); // NOI18N
+        cmbCategoriaResumen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCategoriaResumenActionPerformed(evt);
+            }
+        });
+        pnlPrincipal.add(cmbCategoriaResumen, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 210, -1));
+
+        btnResumenes.setFont(new java.awt.Font("NATS", 0, 20)); // NOI18N
+        btnResumenes.setText("Resumir");
+        btnResumenes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResumenesActionPerformed(evt);
+            }
+        });
+        pnlPrincipal.add(btnResumenes, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 640, -1, -1));
+
+        btnRegistrar.setFont(new java.awt.Font("NATS", 0, 20)); // NOI18N
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarActionPerformed(evt);
             }
         });
+        pnlPrincipal.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 260, -1, -1));
 
-        jLabel2.setText("Categoría");
+        lblTotal.setFont(new java.awt.Font("NATS", 0, 20)); // NOI18N
+        lblTotal.setForeground(new java.awt.Color(221, 255, 240));
+        lblTotal.setText("Total");
+        pnlPrincipal.add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 590, -1, -1));
 
-        cmbCategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbCategoriaActionPerformed(evt);
-            }
-        });
+        lblResumenGastos.setFont(new java.awt.Font("NATS", 0, 42)); // NOI18N
+        lblResumenGastos.setForeground(new java.awt.Color(221, 255, 240));
+        lblResumenGastos.setText("Resumen de Gastos");
+        pnlPrincipal.add(lblResumenGastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, -1, -1));
 
-        btnResumenes.setText("Resumenes de gastos");
-        btnResumenes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnResumenesActionPerformed(evt);
-            }
-        });
+        btnCerrar.setBackground(new java.awt.Color(167, 1, 37));
+        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jLabel3.setText("Categoría");
+        lblCerrar.setFont(new java.awt.Font("NATS", 0, 48)); // NOI18N
+        lblCerrar.setForeground(new java.awt.Color(221, 255, 240));
+        lblCerrar.setText("X");
 
-        cmbCategoria1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbCategoria1ActionPerformed(evt);
-            }
-        });
-
-        jScrollPane1.setViewportView(jList1);
-
-        jLabel4.setText("Total");
-
-        jTextField1.setEditable(false);
-        jTextField1.setEnabled(false);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnResumenes)
-                .addGap(16, 16, 16))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(lblExplicacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnRegistrar))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel2))
-                            .addGap(41, 41, 41)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtGasto)
-                                .addComponent(cmbCategoria, 0, 336, Short.MAX_VALUE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(69, 69, 69)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
-                            .addComponent(cmbCategoria1, 0, 536, Short.MAX_VALUE)
-                            .addComponent(jTextField1))))
-                .addGap(182, 182, 182))
+        javax.swing.GroupLayout btnCerrarLayout = new javax.swing.GroupLayout(btnCerrar);
+        btnCerrar.setLayout(btnCerrarLayout);
+        btnCerrarLayout.setHorizontalGroup(
+            btnCerrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnCerrarLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(lblCerrar)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtGasto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblExplicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegistrar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbCategoria1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(33, 33, 33)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addComponent(btnResumenes)
-                .addGap(22, 22, 22))
+        btnCerrarLayout.setVerticalGroup(
+            btnCerrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnCerrarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        pnlPrincipal.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, 70, 70));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -208,7 +264,7 @@ public class CalculadoraFrm extends javax.swing.JFrame {
 
     private void btnResumenesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResumenesActionPerformed
         // Obtener la categoría seleccionada
-        String nombreCategoria = (String) cmbCategoria1.getSelectedItem();
+        String nombreCategoria = (String) cmbCategoriaResumen.getSelectedItem();
         if (nombreCategoria != null) {
             Categoria categoria = categorias.get(nombreCategoria);
             if (categoria != null) {
@@ -224,11 +280,11 @@ public class CalculadoraFrm extends javax.swing.JFrame {
                 }
 
                 // Asignar el modelo a la JList
-                jList1.setModel(model);
+                lstResumen.setModel(model);
 
                 // Calcular y mostrar el total de gastos
                 double total = categoria.getGastos().stream().mapToDouble(Gasto::getMonto).sum();
-                jTextField1.setText(String.format("$%.2f MXN", total));
+                txtTotal.setText(String.format("$%.2f MXN", total));
             } else {
                 JOptionPane.showMessageDialog(this, "Categoría no encontrada.");
             }
@@ -253,9 +309,17 @@ public class CalculadoraFrm extends javax.swing.JFrame {
         txtGasto.setText("");
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
-    private void cmbCategoria1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoria1ActionPerformed
+    private void cmbCategoriaResumenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoriaResumenActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cmbCategoria1ActionPerformed
+    }//GEN-LAST:event_cmbCategoriaResumenActionPerformed
+
+    private void txtGastoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGastoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtGastoActionPerformed
+
+    private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTotalActionPerformed
 
     
     /**
@@ -294,19 +358,25 @@ public class CalculadoraFrm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel btnCerrar;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnResumenes;
     private javax.swing.JComboBox<String> cmbCategoria;
-    private javax.swing.JComboBox<String> cmbCategoria1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JComboBox<String> cmbCategoriaResumen;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblCategoriaRegistro;
+    private javax.swing.JLabel lblCategoriaResumen;
+    private javax.swing.JLabel lblCerrar;
     private javax.swing.JLabel lblExplicacion;
+    private javax.swing.JLabel lblFondo;
+    private javax.swing.JLabel lblGastoMXN;
+    private javax.swing.JLabel lblRegistroGastos;
+    private javax.swing.JLabel lblResumenGastos;
+    private javax.swing.JLabel lblTotal;
+    private javax.swing.JList<String> lstResumen;
+    private javax.swing.JPanel pnlBack;
+    private javax.swing.JPanel pnlPrincipal;
     private javax.swing.JTextField txtGasto;
+    private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 }
