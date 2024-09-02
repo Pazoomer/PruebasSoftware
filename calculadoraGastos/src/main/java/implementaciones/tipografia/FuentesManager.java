@@ -22,7 +22,7 @@ public class FuentesManager {
     public void cargarFuente() {
         try {
             // Load the font from a file
-            File fontFile = new File("src/main/resources/fonts/Montserrat-Light.ttf");
+            File fontFile = new File("src/main/java/resources/fonts/Montserrat-Light.ttf");
             Font customFont = Font.createFont(Font.TRUETYPE_FONT, fontFile);
 
             // Register the font with the graphics environment
@@ -30,8 +30,8 @@ public class FuentesManager {
             ge.registerFont(customFont);
 
             // Create derived fonts
-            fuenteCuerpo = customFont.deriveFont(24f); // Size for body text
-            fuenteTitulo = customFont.deriveFont(32f); // Size for titles
+            fuenteCuerpo = customFont.deriveFont(16f); // Size for body text
+            fuenteTitulo = customFont.deriveFont(30f); // Size for titles
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
         }

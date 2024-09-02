@@ -11,6 +11,7 @@ import implementaciones.control.Gasto;
 import implementaciones.control.ConfiguradorDatos;
 import implementaciones.multimedia.FotosManager;
 import implementaciones.tipografia.FuentesManager;
+import java.awt.Color;
 import java.awt.Font;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,17 +31,49 @@ public class CalculadoraFrm extends javax.swing.JFrame {
     private CalculadoraGastos calculadora;
     private Map<String, Categoria> categorias;
     private GestorDeGastos gestorDeGastos;
-    private Font fuentePersonalizada;
-    private FuentesManager fuentes;
+    private FuentesManager fuentesManager;
     
     public CalculadoraFrm() {
         initComponents();
-        fuentes = new FuentesManager();
+        fuentesManager = new FuentesManager();
+        fuentesManager.cargarFuente(); // Load fonts
         inicializarDatos();
         actualizarExplicacion();
-
+        actualizarFuenteTitulo();
+        actualizarFuenteCuerpo();
     }
     
+    private void actualizarFuenteCuerpo() {
+        Font fuenteCuerpo = fuentesManager.getFuenteCuerpo();
+        if (fuenteCuerpo != null) {
+            lblCategoriaRegistro.setFont(fuenteCuerpo);
+            lblCategoriaResumen.setFont(fuenteCuerpo);
+            lblGastoMXN.setFont(fuenteCuerpo);
+            lblTotal.setFont(fuenteCuerpo);
+            lblExplicacion.setFont(fuenteCuerpo);
+            txtGasto.setFont(fuenteCuerpo);
+            txtTotal.setFont(fuenteCuerpo);
+            cmbCategoria.setFont(fuenteCuerpo);
+            cmbCategoriaResumen.setFont(fuenteCuerpo);
+            lstResumen.setFont(fuenteCuerpo);
+            btnRegistrar.setFont(fuenteCuerpo);
+            btnResumenes.setFont(fuenteCuerpo);
+            
+        } else {
+            System.out.println("Fuente no cargada correctamente.");
+        }
+    }
+    
+        private void actualizarFuenteTitulo() {
+        Font fuenteTitulo = fuentesManager.getFuenteTitulo();
+        if (fuenteTitulo != null) {
+            lblRegistroGastos.setFont(fuenteTitulo);
+            lblResumenGastos.setFont(fuenteTitulo);
+            // Apply font to other components if needed
+        } else {
+            System.out.println("Fuente no cargada correctamente.");
+        }
+    }
     
     private void inicializarDatos() {
         this.fotosManager = new FotosManager() ;
@@ -48,7 +81,8 @@ public class CalculadoraFrm extends javax.swing.JFrame {
         categorias = new HashMap<>();
 
         
-        lblFondo.setIcon(fotosManager.getFoto(("src/main/java/implementaciones/imagenes/fondoMorado.jpeg")));
+        lblFondo.setIcon(fotosManager.getFoto(
+                ("src/main/java/implementaciones/imagenes/fondoMorado.jpeg")));
                 
         
         // Usar el ConfiguradorDeDatos para inicializar datos
@@ -224,6 +258,20 @@ public class CalculadoraFrm extends javax.swing.JFrame {
 
         btnCerrar.setBackground(new java.awt.Color(167, 1, 37));
         btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCerrarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCerrarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCerrarMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnCerrarMousePressed(evt);
+            }
+        });
 
         lblCerrar.setFont(new java.awt.Font("NATS", 0, 48)); // NOI18N
         lblCerrar.setForeground(new java.awt.Color(221, 255, 240));
@@ -321,42 +369,23 @@ public class CalculadoraFrm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTotalActionPerformed
 
+    private void btnCerrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCerrarMousePressed
+
+    private void btnCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_btnCerrarMouseClicked
+
+    private void btnCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseEntered
+        btnCerrar.setBackground(new Color(206, 66, 87));
+    }//GEN-LAST:event_btnCerrarMouseEntered
+
+    private void btnCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseExited
+        btnCerrar.setBackground(new Color(167, 1, 37));
+    }//GEN-LAST:event_btnCerrarMouseExited
+
     
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CalculadoraFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CalculadoraFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CalculadoraFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CalculadoraFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CalculadoraFrm().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnCerrar;
     private javax.swing.JButton btnRegistrar;
