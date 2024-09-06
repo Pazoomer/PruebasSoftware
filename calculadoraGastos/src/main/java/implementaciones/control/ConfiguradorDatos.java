@@ -1,12 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package implementaciones.control;
 
 import java.util.Map;
 
+/**
+ * Diccionario de datos con las categorias de gastos 
+ * 
+ * @author gamaliel
+ */
 public class ConfiguradorDatos {
+    
     public static void inicializarDatos(CalculadoraGastos calculadora, Map<String, Categoria> categorias) {
         // Crear categorías con descripciones
         Categoria comida = new Categoria("Alimentación", "Gastos relacionados con alimentos y bebidas.");

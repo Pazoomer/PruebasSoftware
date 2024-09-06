@@ -1,17 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package implementaciones.control;
 
-/**
- *
- * @author gamaliel
- */
-import implementaciones.control.Categoria;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Clase encargada de administrar el mapa de las categorias
+ * 
+ * @author gamaliel
+ */
 public class CalculadoraGastos {
 
     private Map<String, Categoria> categorias;
