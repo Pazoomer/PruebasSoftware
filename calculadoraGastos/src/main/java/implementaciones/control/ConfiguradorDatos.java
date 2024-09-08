@@ -21,10 +21,10 @@ public class ConfiguradorDatos {
         Categoria gas = new Categoria("Gas", "Pago del servicio de gas LP.");
         Categoria telefonia = new Categoria("Telefonía", "Gastos de servicio de telefonía celular.");
         Categoria internet = new Categoria("Internet", "Gastos de uso de internet.");
-        Categoria entretenimiento = new Categoria("Entretenimiento", "Gastos en funciones de entretenimiento como cine, conciertos, entre otros.");
+        Categoria entretenimiento = new Categoria("Entretenimiento", "Gastos en funciones de entretenimiento como cine.");
         Categoria deudas = new Categoria("Deudas", "Pago de deudas varias.");
         Categoria transporte = new Categoria("Transporte", "Gastos de transporte, incluidos pasajes de autobús.");
-        Categoria otros = new Categoria("Otros", "Gastos varios no registrados como golosinas o.");
+        Categoria otros = new Categoria("Otros", "Gastos varios no registrados como golosinas.");
 
         // Agregar categorías a la calculadora
         calculadora.agregarCategoria(comida);

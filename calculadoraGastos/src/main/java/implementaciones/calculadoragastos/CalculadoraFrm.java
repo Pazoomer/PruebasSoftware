@@ -201,9 +201,10 @@ public class CalculadoraFrm extends javax.swing.JFrame {
         });
         pnlPrincipal.add(cmbCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, 210, -1));
 
-        lblExplicacion.setFont(new java.awt.Font("NATS", 0, 20)); // NOI18N
+        lblExplicacion.setFont(new java.awt.Font("NATS", 0, 10)); // NOI18N
         lblExplicacion.setForeground(new java.awt.Color(221, 255, 240));
-        pnlPrincipal.add(lblExplicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 330, 40));
+        lblExplicacion.setText("Ejemplo");
+        pnlPrincipal.add(lblExplicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 450, 50));
 
         lblCategoriaResumen.setFont(new java.awt.Font("NATS", 0, 20)); // NOI18N
         lblCategoriaResumen.setForeground(new java.awt.Color(221, 255, 240));
@@ -361,6 +362,10 @@ public class CalculadoraFrm extends javax.swing.JFrame {
 
         // Limpiar el campo de texto
         txtGasto.setText("");
+        
+        //Resumir el gasto registrado
+        cmbCategoriaResumen.setSelectedIndex(cmbCategoria.getSelectedIndex());
+        resumir();
     }
     
     /**
@@ -389,7 +394,7 @@ public class CalculadoraFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnResumenesActionPerformed
 
     private void cmbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoriaActionPerformed
-
+        actualizarExplicacion();
     }//GEN-LAST:event_cmbCategoriaActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
@@ -397,7 +402,7 @@ public class CalculadoraFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void cmbCategoriaResumenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoriaResumenActionPerformed
-        // TODO add your handling code here:
+        resumir();
     }//GEN-LAST:event_cmbCategoriaResumenActionPerformed
 
     private void txtGastoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGastoActionPerformed
