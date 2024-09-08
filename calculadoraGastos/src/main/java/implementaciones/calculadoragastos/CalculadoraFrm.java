@@ -56,6 +56,8 @@ public class CalculadoraFrm extends javax.swing.JFrame {
             lblExplicacion.setFont(fuenteCuerpo);
             txtGasto.setFont(fuenteCuerpo);
             txtTotal.setFont(fuenteCuerpo);
+            txtTotal.setBackground(Color.BLACK);         // Asegura que el fondo sea visible
+            txtTotal.setForeground(Color.WHITE);         // Cambia el color del texto si lo deseas
             cmbCategoria.setFont(fuenteCuerpo);
             cmbCategoriaResumen.setFont(fuenteCuerpo);
             lstResumen.setFont(fuenteCuerpo);
