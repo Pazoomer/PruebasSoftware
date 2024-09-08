@@ -56,8 +56,8 @@ public class CalculadoraFrm extends javax.swing.JFrame {
             lblExplicacion.setFont(fuenteCuerpo);
             txtGasto.setFont(fuenteCuerpo);
             txtTotal.setFont(fuenteCuerpo);
-            txtTotal.setBackground(Color.BLACK);         // Asegura que el fondo sea visible
-            txtTotal.setForeground(Color.WHITE);         // Cambia el color del texto si lo deseas
+            txtTotal.setBackground(Color.BLACK);     
+            txtTotal.setForeground(Color.WHITE);       
             cmbCategoria.setFont(fuenteCuerpo);
             cmbCategoriaResumen.setFont(fuenteCuerpo);
             lstResumen.setFont(fuenteCuerpo);
@@ -226,7 +226,7 @@ public class CalculadoraFrm extends javax.swing.JFrame {
         lstResumen.setFont(new java.awt.Font("NATS", 0, 20)); // NOI18N
         jScrollPane1.setViewportView(lstResumen);
 
-        pnlPrincipal.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 440, 210, -1));
+        pnlPrincipal.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, 350, 110));
 
         cmbCategoriaResumen.setFont(new java.awt.Font("NATS", 0, 20)); // NOI18N
         cmbCategoriaResumen.addActionListener(new java.awt.event.ActionListener() {
@@ -396,12 +396,17 @@ public class CalculadoraFrm extends javax.swing.JFrame {
      */
     private void costoTotal() {
         Double montoTotal=0d;
+        DefaultListModel<String> model = new DefaultListModel<>();
         // Iterar sobre la lista de categorias y agregar cada gasto al modelo
         for (Categoria categoria : categorias.values()) {
             for (Gasto gasto : categoria.getGastos()) {
                 montoTotal+=gasto.getMonto();
+                String montoDetallada = String.format("$ %.2f MXN / %s", gasto.getMonto(), categoria.getNombre());
+                model.addElement(montoDetallada);
             }
         }
+        // Asignar el modelo a la JList
+        lstResumen.setModel(model);
         String montoFormateado = String.format("$ %.2f MXN", montoTotal);
         txtTotal.setText(montoFormateado);
     }
