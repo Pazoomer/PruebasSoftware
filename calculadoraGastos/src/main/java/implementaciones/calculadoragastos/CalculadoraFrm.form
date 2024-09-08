@@ -271,14 +271,14 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="NATS" size="20" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Resumir"/>
+            <Property name="text" type="java.lang.String" value="Costo Total"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnResumenesActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="500" y="640" width="-1" height="-1"/>
+              <AbsoluteConstraints x="466" y="640" width="140" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>

@@ -235,13 +235,13 @@ public class CalculadoraFrm extends javax.swing.JFrame {
         pnlPrincipal.add(cmbCategoriaResumen, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 210, -1));
 
         btnResumenes.setFont(new java.awt.Font("NATS", 0, 20)); // NOI18N
-        btnResumenes.setText("Resumir");
+        btnResumenes.setText("Costo Total");
         btnResumenes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnResumenesActionPerformed(evt);
             }
         });
-        pnlPrincipal.add(btnResumenes, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 640, -1, -1));
+        pnlPrincipal.add(btnResumenes, new org.netbeans.lib.awtextra.AbsoluteConstraints(466, 640, 140, -1));
 
         btnRegistrar.setFont(new java.awt.Font("NATS", 0, 20)); // NOI18N
         btnRegistrar.setText("Registrar");
@@ -388,9 +388,24 @@ public class CalculadoraFrm extends javax.swing.JFrame {
     private void cursorSaleBotonCerrar(){
          btnCerrar.setBackground(new Color(167, 1, 37));
     }
-    private void btnResumenesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResumenesActionPerformed
-        resumir();
 
+    /**
+     * Muestra el costo total de todas las categorias juntas
+     */
+    private void costoTotal() {
+        Double montoTotal=0d;
+        // Iterar sobre la lista de categorias y agregar cada gasto al modelo
+        for (Categoria categoria : categorias.values()) {
+            for (Gasto gasto : categoria.getGastos()) {
+                montoTotal+=gasto.getMonto();
+            }
+        }
+        String montoFormateado = String.format("$ %.2f MXN", montoTotal);
+        txtTotal.setText(montoFormateado);
+    }
+
+    private void btnResumenesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResumenesActionPerformed
+        costoTotal();
     }//GEN-LAST:event_btnResumenesActionPerformed
 
     private void cmbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoriaActionPerformed
